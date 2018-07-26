@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Clean Blog - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="display:none;">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="post.html">Sample Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('https://res.cloudinary.com/hy4kyit2a/image/upload/CFP-homepage-background.png');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>Migrating from one salesforce app to new salesforce app</h1>
+              <span class="meta">Posted
+                on July 26, 2018</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <section>
+                <div class="backToPage">
+                    <a href="index.html">
+                        <span>
+                            Back to All Stories
+                        </span>
+                    </a>
+                </div>
+            </section>
+            <h2 class="section-heading">Use & Store a Previous System Record ID</h2>
+            <p>Always use a column with a Record Id coming from the previous system (RecordId__c) in your CSV file or Custom migration script. Even if it’s not needed and/or not possible to create a custom field for such purpose in the Salesforce destination table. Thanks to this Legacy ID it will be easier to remove or debug records afterwards. For example: I had to do a dml operation where I needed to remove/add some of the records without knowing which one from the new entity referred to which one in the legacy org.</p>
+            
+            <h2 class="section-heading">Deactivate the trigger</h2>
+            <p>While importing the data / executing the custom migration script, The best solution is to temporary deactivate the trigger in destination org to avoiding the FATAL Error (System Limit exception).</p>
+            
+            <h2 class="section-heading">Data validation issues</h2>
+            <p>Some validation rules may not be 100% compliant with legacy data (or the other way around). While the quick & dirty solution is to temporary deactivate the blocking rule, it’s only postponing the issue for later as the first user that will try to update the record will face the blocking message. The best solution here is to modify the data before the upload or to slightly adapt the validation rule.</p>
+            
+            <h2 class="section-heading">Attachments</h2>
+            <p>Files, Content, Library, Attachment, …. in Salesforce: each file storing solution has different limitations such as their file size. Dataloader is sometimes more restrictive (file size related) than a manual upload done in the user interface. Furthermore, don’t forget that it’s not an easy task to upload large amount of files in one single pass. The best solution here is simply to split the load into several uploads.</p>
+            
+            <h2 class="section-heading">Test, test & test for each object and each field</h2>
+            <p>Some fields are only allowed to be populated with an Update operation while others are only allowed to be populated during an Insert. It is possible to specify the value for system fields (such as created date/by & last modified date/by), but this is only possible during an Insert operation (and not for all objects), and not during an Update. If an update is needed afterwards, some system fields will be changed (last modified date/by) and won’t match your uploaded value. So double check everything before pressing the Insert button/executing the custom migration script.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>
